@@ -1,0 +1,45 @@
+<div class="container-fluid profile-details" *ngIf="user">
+    <div class="profile-header"></div>
+  
+    <div class="profile-body">
+      <div class="profile-pic"></div>
+      <div class="gap"></div>
+      <h1 class="text-center">{{ user.name }} {{ user.lastname }}</h1>
+      <div class="form-group row">
+        <div class="col-md-8 offset-md-2">
+          <label for="">Number</label>
+        
+          <input class="form-control" [disabled]="!isEditMode" [value]="user.number">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-8 offset-md-2">
+          <label for="">Email</label>
+        
+          <input class="form-control" [disabled]="!isEditMode" [value]="user.email">
+        </div>
+      </div>
+      <!-- إضافة حقل "Date of birth" -->
+      <div class="form-group row">
+        <div class="col-md-8 offset-md-2">
+          <label for="">Date of birth</label>
+       
+          <input class="form-control" [disabled]="!isEditMode" [value]="user.dob">
+        </div>
+      </div>
+    
+      <div class="form-group row">
+        <div class="col-md-8 offset-md-2">
+          <label for="">Address</label>
+       
+          <input class="form-control" [disabled]="!isEditMode" [value]="user.address">
+        </div>
+      </div>
+      
+     
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="toggleEditMode()">{{ isEditMode ? 'حفظ التغييرات' : 'تعديل البيانات' }}</button>
+      </div>
+    </div>
+  </div>
+  

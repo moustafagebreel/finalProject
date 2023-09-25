@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="cart-wrapper">
+        <div class="cart" *ngIf="cartItems && cartItems.length">
+            <table class="table table-cart">
+                <thead class="table-head">
+                    <tr>
+                        <td>Product</td>
+                        <td> </td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                        <td> </td>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr *ngFor="let item of cartItems">
+                        <td>
+                            <div class="item-img">
+                                <a routerLink="/p/{{item.id}}/{{item.slug}}"><img imageLoader src="{{item.imgUrl}}" (load)="productService.loadImage()" ></a>
+                            </div>
+                        </td>
+                        <td class="product-name">
+                            <p class="">{{item.name}}</p>
+                        </td>
+                        <!-- OfferDiscount conditional render -->
+                        <td *ngIf="item.offerDiscount">
+                            <p class="price-real ">${{item.price | number }}</p>
+                            <p class="price-offer text-danger"> ${{ getDiscountPrice(item) | number }}</p>
+                        </td>
+
+                        <td *ngIf="!item.offerDiscount">
+                            <p class="price-offer text-danger">${{item.price | number }}</p>
+                        </td>
+                        <!-- End OfferDiscount conditional render -->
+
+                        <!-- Product Quantity -->
+                        <td class="product-quantity">
+                            <div style="margin: 0 auto; width: fit-content; width: -moz-fit-content;">
+                                <app-cart-quantity-button (setTotalPurchase)="setTotalPurchase($event)"
+                                    [product]="item"></app-cart-quantity-button>
+                            </div>
+                        </td>
+                        <!-- End Product Quantity -->
+
+                        <!-- Product Total -->
+                        <td class="product-total">
+                            <p>${{item.totalPurchase | number }}</p>
+                        </td>
+                        <!-- End Product Total -->
+
+                        <!-- Product Remove -->
+                        <td class="product-remove">
+                            <p [class.hide]="item.isLoading?.removing" class="remove-item"
+                                (click)="removeItemFromCart($event, item)">x</p>
+                            <object [class.hide]="!item.isLoading?.removing" width="20" height="20" type="image/svg+xml"
+                                data="assets/img/loading-circle.svg"> </object>
+                        </td>
+                        <!-- End Product Remove -->
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="cart-checkout" *ngIf="cartItems && cartItems.length">
+            <p class="font-weight-bold">Subtotal: <span class="float-right"> ${{ realTotalPrice | number}}</span></p>
+            <p *ngIf="totalDiscounts">Products discount: <span class="float-right">
+                    -${{ totalDiscounts | number}}</span></p>
+            <p class="total-checkout font-weight-bold" *ngIf="!isUpdatingTotal">Total <span
+                    class="float-right text-danger">${{ finalTotalPrice | number}}</span></p>
+
+            <object *ngIf="isUpdatingTotal" style="margin: 0 auto;" width="20" height="20" type="image/svg+xml"
+                data="assets/img/loading-circle.svg"> </object>
+        </div>
+
+        <!-- Show when cart is empty -->
+        <div class="empty-cart" *ngIf="(!cartItems || !cartItems.length) && !cartIsLoading">
+            <h1 class="empty-cart-title">Your cart is empty</h1>
+            <p>Here in DeepCart we have plenty of products to choose from.</p>
+            <a routerLink="/" class="btn btn-warning">Explore</a>
+        </div>
+    </div>
+</div>
+
+<!-- <code *ngFor="let item of cartItems">
+    {{item | json}}
+</code> -->

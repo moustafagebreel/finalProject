@@ -1,0 +1,18 @@
+.notfound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+    width: 100%;
+}
+
+.notfound .notfound-title::before{
+    background-image: url('/assets/img/error-404.png');
+    background-size: 80px 80px;
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    content: "";
+}

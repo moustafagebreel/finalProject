@@ -1,0 +1,27 @@
+<div class="card-item" [class.h-100]="completePrice">
+    <div class="product-card" [ngClass]="{
+        'h-100': completePrice,
+        'zcero': completePrice
+      }">
+			<a (mousedown)="onMouseDown($event)" (click)="onClick($event)">
+				<div class="pc-img-container">
+					<img imageLoader alt="" (load)="productService.loadImage()" draggable="false" src="{{product.imgUrl}}" alt="">
+				</div>
+				<div class="pc-description">
+					<p *ngIf="product.offerDiscount" class="price-real" [class.show]="completePrice">
+							${{product.price | number }}</p>
+					<p class="price-offer"> ${{ getDiscountPrice() | number }} <span *ngIf="product.offerDiscount"
+									class="float-right text-success">{{product.offerDiscount}}% OFF</span></p>
+					<p *ngIf="!completeName"> {{(product.name.length>30)? (product.name | slice:0:30)+'..':(product.name)}} </p>
+					<p *ngIf="completeName"> {{product.name}} </p>
+				</div>
+			</a>
+			<div class="button-quantity">
+					<app-cart-quantity-button  *ngIf="buttonCart"
+						[product]= "product"
+						[canNotify] = "true"
+						[canRemoveFromCart] = "true">
+					</app-cart-quantity-button>
+			</div>
+    </div>
+</div>

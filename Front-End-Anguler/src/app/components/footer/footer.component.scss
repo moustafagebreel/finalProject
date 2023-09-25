@@ -1,0 +1,54 @@
+// Variables
+$primary-color: #da494c;
+$background-color: #222;
+$text-color: #fff;
+
+// Footer styles
+.footer {
+    background-color: $background-color;
+    color: $text-color;
+    padding: 40px 0;
+
+    .flex-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // Three columns
+        gap: 20px;
+        align-items: center; // Center items vertically
+
+        .item {
+            text-align: center; // Center text within items
+
+            h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+
+                li {
+                    margin-bottom: 10px;
+                }
+            }
+
+            i {
+                margin-right: 10px;
+            }
+
+            .link {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 40px;
+    }
+}

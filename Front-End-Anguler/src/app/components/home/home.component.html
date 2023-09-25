@@ -1,0 +1,26 @@
+<app-carousel></app-carousel>
+
+<section id="categories">
+  <div *ngIf="categoriesList" class="container mt-5">
+    <h2 class="mb-3 muted">Explore categories</h2>
+
+    <div class="row">
+      <div class="col-md-4" *ngFor="let category of categoriesList">
+        <a routerLink="c/{{category.slug}}" class="category-item">
+          <div class="icon">
+            <img src="assets/icons/{{category.icon}}.svg" alt="Kiwi standing on oval">
+          </div>
+          <p class="text-center"> {{category.name}}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="offers">
+    <app-offers></app-offers>
+</section>
+
+<section id="contact">
+  <app-footer></app-footer>
+</section>

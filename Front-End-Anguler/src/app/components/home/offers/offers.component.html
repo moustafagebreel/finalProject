@@ -1,0 +1,22 @@
+<div *ngIf="offersList" class="container mt-4">
+    <h2 class="muted">Some Product</h2>
+
+    <!-- Product List -->
+    <div class="product-list">
+        <div *ngFor="let offer of displayedOffers" class="product-item">
+            <app-product-card [product]="offer"></app-product-card>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button
+            *ngFor="let page of totalPagesArray"
+            class="pagination-button"
+            [class.active]="page === currentPage"
+            (click)="changePage(page)"
+        >
+            {{ page }}
+        </button>
+    </div>
+</div>

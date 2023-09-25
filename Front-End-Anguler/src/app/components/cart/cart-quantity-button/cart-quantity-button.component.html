@@ -1,0 +1,16 @@
+<button *ngIf="!product.quantityPurchase" class="btn btn-warning" 
+        [disabled]="isClicked" 
+        (click) = "addToCart()">Add to cart <i class="fas fa-shopping-cart"></i>
+</button>
+
+<div class="product-quantity-button" *ngIf="product.quantityPurchase">
+        <a href="#" [class.hide]="isLoading" (click)="substractQuantityPurchase($event)">
+                <i class="far fa-trash-alt"
+                *ngIf="product.quantityPurchase == 1 && canRemoveFromCart">
+                </i>{{product.quantityPurchase == 1 ? (canRemoveFromCart ? '' : '-') : '-'}}
+        </a>
+        <p [class.hide]="isLoading">{{product.quantityPurchase}}</p>
+        <a href="#" [class.hide]="isLoading" (click)="addQuantityPurchase($event)">+</a>
+        <object [class.hide]="!isLoading" style="margin: 0 auto; display: block;" width="24" height="24"
+                type="image/svg+xml" data="assets/img/loading-circle.svg"> </object>
+</div>
